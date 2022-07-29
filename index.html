@@ -10,12 +10,70 @@
     <script>
         // create getComputerChoice that will randomly return Rock, Paper or Scissor. This will act as the CPU opponent.
         function getComputerChoice() {
-            prompt("Do you choose Rock, Paper or Scissors?");
-            let computerChoice = Math.random;
-            console.log(computerChoice);
+            alert("The computer is making it's decision...");
+            let computerChoice = Math.random();
+            console.log(computerChoice); // Test.
+
+        if (computerChoice <= 0.333)
+         {
+            computerChoice = "Rock";
+         }
+        else if (computerChoice > 0.333 && computerChoice <= 0.666) 
+        {
+            computerChoice = "Paper";
+        }
+        else 
+        {
+            computerChoice = "Scissors";
+        }
+
+            console.log(computerChoice); // Test.
+            return computerChoice;
         };
+
+        // The playRound function should take two parameters 1) the playerSelection and 2) computerSelection.
+
+        function getPlayerChoice() {
+            let playerChoice = prompt("It's your turn to choose, please input either Rock, Paper or Scissors...", "");
+        while (!(playerChoice === "Rock" ||playerChoice === "Paper" || playerChoice === "Scissors" || playerChoice === null || playerChoice === ""))
+        {    
+            if (playerChoice === "Rock") 
+            {
+                alert("You selected Rock...");
+                return playerChoice;
+            }
+
+            else if (playerChoice === "Paper")
+            {
+                alert("You selected Paper...");
+                return playerChoice;
+            }
+            else if (playerChoice === "Scissors")
+            {
+                alert("You selected Scissors...")
+                return playerChoice;
+            }
+            else if (playerChoice === null || playerChoice === "")
+            {
+                alert("Game canceled");
+                return;
+            }
+            else 
+            {
+                let playerChoice = prompt("That is an invalid response, please try again", "");
+            }
+        } // end of while loop.  
+        }
+
+        getComputerChoice(); // Test
+        getPlayerChoice(); // Test
+        console.log(playerChoice);
+
         // Write a function that plays a single round of Rock Paper Scissors. We'll call the function playRound().
-        // The function should take two parameters 1) the playerSelection and 2) computerSelection.
+        function playRound() {
+            getComputerChoice();
+        }
+
         // A string should be returned that displays something along the line of "You win!", "You Lose!" or "Draw!".
         // The playerSelection parameter should be case insensitive to ensure any variation of "Rock/rock/ROCK" is accepted.
         // If the result ends up being "Draw" Establish code so that both players will play again until a winner is decided.
