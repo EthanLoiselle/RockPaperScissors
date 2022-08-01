@@ -8,6 +8,7 @@
 </head>
 <body>
     <script>
+        // The playRound function should take two parameters 1) the playerSelection and 2) computerSelection.
         // create getComputerChoice that will randomly return Rock, Paper or Scissor. This will act as the CPU opponent.
         function getComputerChoice() {
             alert("The computer is making it's decision...");
@@ -18,56 +19,60 @@
          {
             computerChoice = "Rock";
          }
-        else if (computerChoice > 0.333 && computerChoice <= 0.666) 
+        else if (computerChoice > (0.666 - 0.001)) 
         {
-            computerChoice = "Paper";
+            computerChoice = "Scissors";
         }
         else 
         {
-            computerChoice = "Scissors";
+            computerChoice = "Paper";
         }
 
             console.log(computerChoice); // Test.
             return computerChoice;
         };
 
-        // The playRound function should take two parameters 1) the playerSelection and 2) computerSelection.
 
         function getPlayerChoice() {
             let playerChoice = prompt("It's your turn to choose, please input either Rock, Paper or Scissors...", "");
-        while (!(playerChoice === "Rock" ||playerChoice === "Paper" || playerChoice === "Scissors" || playerChoice === null || playerChoice === ""))
-        {    
-            if (playerChoice === "Rock") 
+            let rock = "rock";
+            let paper = "paper";
+            let scissors = "scissors";
+
+        // The playerChoice value should be case insensitive to ensure any variation of "Rock/rock/ROCK" is accepted.   
+            let result = playerChoice.toLowerCase();
+
+            if (result === rock) 
             {
-                alert("You selected Rock...");
-                return playerChoice;
+                alert("You selected rock...");
+                return result;
             }
 
-            else if (playerChoice === "Paper")
+            else if (result === paper)
             {
-                alert("You selected Paper...");
-                return playerChoice;
+                alert("You selected paper...");
+                return result;
             }
-            else if (playerChoice === "Scissors")
+            else if (result === scissors)
             {
-                alert("You selected Scissors...")
-                return playerChoice;
+                alert("You selected scissors...");
+                return result;
             }
-            else if (playerChoice === null || playerChoice === "")
+            else if (result == null || result == "")
             {
                 alert("Game canceled");
                 return;
             }
-            else 
+            else
             {
-                let playerChoice = prompt("That is an invalid response, please try again", "");
-            }
-        } // end of while loop.  
-        }
+                alert("Invalid choice.");
+                getPlayerChoice();
+            }  
+        } 
 
         getComputerChoice(); // Test
         getPlayerChoice(); // Test
-        console.log(playerChoice);
+        console.log(result);
 
         // Write a function that plays a single round of Rock Paper Scissors. We'll call the function playRound().
         function playRound() {
@@ -75,7 +80,6 @@
         }
 
         // A string should be returned that displays something along the line of "You win!", "You Lose!" or "Draw!".
-        // The playerSelection parameter should be case insensitive to ensure any variation of "Rock/rock/ROCK" is accepted.
         // If the result ends up being "Draw" Establish code so that both players will play again until a winner is decided.
         // Write another function called game(). Call the playRound function from within.
         // Establish a loop to ensure up to 5 rounds are played and score is being kept.
