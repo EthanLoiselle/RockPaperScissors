@@ -15,53 +15,51 @@
             let computerChoice = Math.random();
             console.log(computerChoice); // Test.
 
+
         if (computerChoice <= 0.333)
          {
-            computerChoice = "Rock";
+            computerChoice = "rock";
+            console.log("CPU selected", computerChoice); 
+            return computerChoice;
          }
         else if (computerChoice > (0.666 - 0.001)) 
         {
-            computerChoice = "Scissors";
+            computerChoice = "scissors";
+            console.log("CPU selected", computerChoice);
+            return computerChoice;
         }
         else 
         {
-            computerChoice = "Paper";
+            computerChoice = "paper";
+            console.log("CPU selected", computerChoice);
+            return computerChoice;
+        }   
         }
 
-            console.log(computerChoice); // Test.
-            return computerChoice;
-        };
-
-
         function getPlayerChoice() {
-            let playerChoice = prompt("It's your turn to choose, please input either Rock, Paper or Scissors...", "");
-            let rock = "rock";
-            let paper = "paper";
-            let scissors = "scissors";
+             // The playerChoice value should be case insensitive to ensure any variation of "Rock/rock/ROCK" is accepted.
+            let playerChoice = prompt("It's your turn to choose, please input either Rock, Paper or Scissors...", "").toLowerCase();
+   
+            let selectionResult = playerChoice;
 
-        // The playerChoice value should be case insensitive to ensure any variation of "Rock/rock/ROCK" is accepted.   
-            let result = playerChoice.toLowerCase();
-
-            if (result === rock) 
+            if (selectionResult === "rock") 
             {
                 alert("You selected rock...");
-                return result;
+                console.log("You selected", selectionResult);
+                return selectionResult;
             }
 
-            else if (result === paper)
+            else if (selectionResult === "paper")
             {
                 alert("You selected paper...");
-                return result;
+                console.log("You selected", selectionResult);
+                return selectionResult;
             }
-            else if (result === scissors)
+            else if (selectionResult === "scissors")
             {
                 alert("You selected scissors...");
-                return result;
-            }
-            else if (result == null || result == "")
-            {
-                alert("Game canceled");
-                return;
+                console.log("You selected", selectionResult);
+                return selectionResult;
             }
             else
             {
@@ -70,17 +68,55 @@
             }  
         } 
 
-        getComputerChoice(); // Test
-        getPlayerChoice(); // Test
-        console.log(result);
 
         // Write a function that plays a single round of Rock Paper Scissors. We'll call the function playRound().
-        function playRound() {
-            getComputerChoice();
+        function playRound()  {
+            let cpuChoice = getComputerChoice();
+            let userChoice = getPlayerChoice();
+            alert(`The player selected ${userChoice} and the computer selected ${cpuChoice}`);
+            console.log(`The player selected ${userChoice} and the computer selected ${cpuChoice}`);
+
+        // A string should be returned that displays something along the line of "You win!", "You Lose!" or "Draw!" 
+            if ( userChoice === "rock" && cpuChoice === "scissors")
+            {
+                alert("Rock beats scissors, you win the round!");
+                console.log("Rock beats scissors, you win the round!");
+            }
+            else if (userChoice === "rock" && cpuChoice === "paper")
+            {
+                alert("Paper beats rock, you lose the round!");
+                console.log("Paper beats rock, you lose the round!");
+            }
+            else if (userChoice === "paper" && cpuChoice === "rock")
+            {
+                alert("Paper beats rock, you win the round!");
+                console.log("Paper beats rock, you win the round!");
+            }
+            else if (userChoice === "paper" && cpuChoice === "scissors")
+            {
+                alert("Scissors beats paper, you lose the round!");
+                console.log("Scissors beats paper, you lose the round!");
+            }
+            else if (userChoice === "scissors" && cpuChoice === "paper")
+            {
+                alert("Scissors beat paper, you win the round!");
+                console.log("Scissors beat paper, you win the round!");
+            }
+            else if (userChoice === "scissors" && cpuChoice === "rock")
+            {
+                alert("rock beats scissors, you lose the round!");
+                console.log("rock beats scissors, you lose the round!");
+            }
+            else  // If the result ends up being "Draw" Establish code so that both players will play again until a winner is decided.
+            {
+                alert("Both the USER and the CPU made the same choice, it's a draw. Replay the round until a winner is decided.");
+                console.log("Both the USER and the CPU made the same choice, it's a draw. Replay the round until a winner is decided.");
+                playRound();
+            }
         }
 
-        // A string should be returned that displays something along the line of "You win!", "You Lose!" or "Draw!".
-        // If the result ends up being "Draw" Establish code so that both players will play again until a winner is decided.
+        playRound();
+
         // Write another function called game(). Call the playRound function from within.
         // Establish a loop to ensure up to 5 rounds are played and score is being kept.
         // The score variables will be kept within the console and depending on the outcome will display "Victory" or "Game Over".
