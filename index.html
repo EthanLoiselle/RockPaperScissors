@@ -38,9 +38,9 @@
 
         function getPlayerChoice() {
              // The playerChoice value should be case insensitive to ensure any variation of "Rock/rock/ROCK" is accepted.
-            let playerChoice = prompt("It's your turn to choose, please input either Rock, Paper or Scissors...", "").toLowerCase();
+            let playerChoice = prompt("It's your turn to choose, please input either Rock, Paper or Scissors...", "");
    
-            let selectionResult = playerChoice;
+            let selectionResult = playerChoice.toLowerCase();
 
             if (selectionResult === "rock") 
             {
@@ -64,7 +64,7 @@
             else
             {
                 alert("Invalid choice.");
-                getPlayerChoice();
+                return getPlayerChoice();
             }  
         } 
 
@@ -73,6 +73,7 @@
         function playRound()  {
             let cpuChoice = getComputerChoice();
             let userChoice = getPlayerChoice();
+
             alert(`The player selected ${userChoice} and the computer selected ${cpuChoice}`);
             console.log(`The player selected ${userChoice} and the computer selected ${cpuChoice}`);
 
@@ -81,45 +82,87 @@
             {
                 alert("Rock beats scissors, you win the round!");
                 console.log("Rock beats scissors, you win the round!");
+                return 1;
             }
             else if (userChoice === "rock" && cpuChoice === "paper")
             {
                 alert("Paper beats rock, you lose the round!");
                 console.log("Paper beats rock, you lose the round!");
+                return 2;
             }
             else if (userChoice === "paper" && cpuChoice === "rock")
             {
                 alert("Paper beats rock, you win the round!");
                 console.log("Paper beats rock, you win the round!");
+                return 1;
             }
             else if (userChoice === "paper" && cpuChoice === "scissors")
             {
                 alert("Scissors beats paper, you lose the round!");
                 console.log("Scissors beats paper, you lose the round!");
+                return 2;
             }
             else if (userChoice === "scissors" && cpuChoice === "paper")
             {
                 alert("Scissors beat paper, you win the round!");
                 console.log("Scissors beat paper, you win the round!");
+                return 1;
             }
             else if (userChoice === "scissors" && cpuChoice === "rock")
             {
                 alert("rock beats scissors, you lose the round!");
                 console.log("rock beats scissors, you lose the round!");
+                return 2;
             }
             else  // If the result ends up being "Draw" Establish code so that both players will play again until a winner is decided.
             {
                 alert("Both the USER and the CPU made the same choice, it's a draw. Replay the round until a winner is decided.");
                 console.log("Both the USER and the CPU made the same choice, it's a draw. Replay the round until a winner is decided.");
-                playRound();
+                return playRound();
             }
         }
 
-        playRound();
+        // Write another function called playGame(). Call the playRound function from within.
+        function playGame() 
+        {
+            alert("Welcome to Rock/Paper/Scissors, the first person to win 3 rounds wins!");
+            console.log("Welcome to Rock/Paper/Scissors, the first person to win 3 rounds wins!");
 
-        // Write another function called game(). Call the playRound function from within.
-        // Establish a loop to ensure up to 5 rounds are played and score is being kept.
-        // The score variables will be kept within the console and depending on the outcome will display "Victory" or "Game Over".
+            let playerPoint = 0;
+            let cpuPoint = 0;
+            let result = playRound();
+
+            // Establish a loop to ensure up to 5 rounds are played and score is being kept.
+            while(playerPoint < 3 || cpuPoint < 3)
+            {
+               console.log(result); 
+               result == 1 ? playerPoint++ : cpuPoint++;
+               console.log(result);
+                
+                if (playerPoint == 3) 
+                {
+                    alert("Congratulations, you won the game!");
+                    console.log("Congratulations, you won the game!");
+                    return;
+                }
+                else if (cpuPoint == 3)
+                {
+                    alert("You lost the game, better luck next time!");
+                    console.log("You lost the game, better luck next time!");
+                    return;
+                }
+                else 
+                {
+                    // The score variables will be kept within the console and depending on the outcome will display "Victory" or "Game Over".
+                    alert(`Round over, the current score is ${playerPoint} for the USER and ${cpuPoint} for the CPU`);
+                    console.log(`Round over, the current score is ${playerPoint} for the USER and ${cpuPoint} for the CPU`);
+                    result = playRound();
+                }
+            } // while loop
+            } 
+
+            playGame();
+     
     
     </script>
 </body>
